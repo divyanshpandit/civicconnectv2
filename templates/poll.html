@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Vote in Poll - CivicConnect{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto text-center">
+  <h2 class="text-3xl font-bold mb-6 text-white">📊 {{ poll[1] }}</h2>
+
+  <form method="POST" class="space-y-4 bg-white/10 backdrop-blur p-6 rounded-xl shadow-md">
+    <div class="text-left space-y-3">
+      <label><input type="radio" name="option" value="{{ poll[2] }}" required class="mr-2"> {{ poll[2] }}</label><br>
+      <label><input type="radio" name="option" value="{{ poll[3] }}" class="mr-2"> {{ poll[3] }}</label><br>
+      <label><input type="radio" name="option" value="{{ poll[4] }}" class="mr-2"> {{ poll[4] }}</label>
+    </div>
+
+    <button type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded transition">
+      Submit Vote
+    </button>
+  </form>
+</div>
+{% endblock %}

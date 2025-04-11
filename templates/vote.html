@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Vote - CivicConnect{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto text-center">
+  <h2 class="text-3xl font-bold mb-6 text-white">🗳️ Vote on Proposed Legislation</h2>
+
+  <form method="POST" action="/vote" class="space-y-4 bg-white/10 backdrop-blur p-6 rounded-xl shadow-md">
+    <input type="text" name="bill" placeholder="Bill Title" required
+           class="w-full px-4 py-2 rounded bg-white/20 text-white placeholder-white/70 border border-white/30 focus:ring-2 focus:ring-blue-500" />
+
+    <div class="text-left space-y-2">
+      <label><input type="radio" name="vote" value="for" required class="mr-2"> For</label><br>
+      <label><input type="radio" name="vote" value="against" class="mr-2"> Against</label><br>
+      <label><input type="radio" name="vote" value="neutral" class="mr-2"> Neutral</label>
+    </div>
+
+    <button type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded transition">
+      Submit Vote
+    </button>
+  </form>
+
+  {% if results %}
+  <div class="mt-8 bg-white/10 backdrop-blur p-4 rounded-xl shadow-md text-white text-left">
+    <h3 class="text-lg font-semibold mb-2">📊 Voting Results</h3>
+    <ul>
+      <li>✅ For: {{ results['for'] }}%</li>
+      <li>❌ Against: {{ results['against'] }}%</li>
+      <li>⚖️ Neutral: {{ results['neutral'] }}%</li>
+    </ul>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

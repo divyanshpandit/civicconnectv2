@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feedback Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+  <style>#map { height: 600px; }</style>
+</head>
+<body>
+  <h2>Feedback Map</h2>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([20.5937, 78.9629], 5); // India center
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19
+    }).addTo(map);
+
+    const feedbacks = {{ feedbacks|tojson }};
+    
+    feedbacks.forEach(fb => {
+      if (fb.location) {
+        const [lat, lon] = fb.location.split(',').map(parseFloat);
+        L.marker([lat, lon])
+          .addTo(map)
+          .bindPopup(`<b>${fb.name}</b><br>${fb.message}`);
+      }
+    });
+  </script>
+</body>
+</html>

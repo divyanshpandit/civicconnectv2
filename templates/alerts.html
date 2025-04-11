@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Community Alerts - CivicConnect{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto text-center">
+  <h2 class="text-3xl font-bold mb-8 text-white">🚨 Latest Community Alerts</h2>
+
+  <div class="space-y-6">
+    {% for neighborhood, alert_text in alerts %}
+      <div class="bg-white/10 backdrop-blur p-5 rounded-xl shadow-md text-left">
+        <p class="text-lg font-semibold text-black-200">{{ neighborhood }}</p>
+        <p class="text-white/90 mt-1">{{ alert_text }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <p class="mt-10">
+    <a href="/new-alert" class="text-blue-300 hover:underline">➕ Post a New Alert</a>
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Add Impact - CivicConnect{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto text-center">
+  <h2 class="text-3xl font-bold mb-6 text-white">📌 Add Impact Data</h2>
+
+  <form method="POST" class="space-y-4 bg-white/10 backdrop-blur p-6 rounded-xl shadow-md">
+    <input name="neighborhood" placeholder="Neighborhood" required
+           class="w-full px-4 py-2 rounded bg-white/20 text-white border border-white/30 placeholder-white/70 focus:ring-2 focus:ring-blue-500" />
+    <input name="impact_level" type="number" min="0" max="10" placeholder="Impact Level (0–10)" required
+           class="w-full px-4 py-2 rounded bg-white/20 text-white border border-white/30 placeholder-white/70 focus:ring-2 focus:ring-blue-500" />
+
+    <button type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded transition">
+      Add Impact
+    </button>
+  </form>
+</div>
+{% endblock %}

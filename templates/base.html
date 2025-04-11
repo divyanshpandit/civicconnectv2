@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}CivicConnect{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            glass: 'rgba(255,255,255,0.1)',
+            borderglass: 'rgba(255,255,255,0.2)'
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    @keyframes gradient-x {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .animate-gradient-x {
+      background-size: 200% 200%;
+      animation: gradient-x 20s ease infinite;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fadein {
+      animation: fadein 1s ease forwards;
+      opacity: 0;
+    }
+
+    .delay-1s { animation-delay: 0.5s; }
+    .delay-2s { animation-delay: 1s; }
+  </style>
+</head>
+
+<body class="relative min-h-screen overflow-hidden text-white">
+
+  <!-- 🔵 Animated Blue Gradient Background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-700 to-indigo-900 animate-gradient-x opacity-30 blur-2xl z-0"></div>
+
+  <!-- 🎇 Particle Effect Layer -->
+  <div id="particles-js" class="z-0"></div>
+
+  <!-- 🌐 Main Foreground UI -->
+  <div class="relative z-10">
+    <!-- Header -->
+    <header class="bg-white/20 backdrop-blur sticky top-0 z-50 shadow-sm border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-white">🌐 CivicConnect</h1>
+        <nav class="flex gap-3">
+          <a href="/" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold shadow transition">
+            🏠 Home
+          </a>
+          <a href="/dashboard" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold shadow transition">
+            📣 Dashboard
+          </a>
+          <a href="/map" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold shadow transition">
+            📍 Map
+          </a>
+          <a href="#tools" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold shadow transition">
+            🧰 Tools
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-white/60 text-sm py-6">
+      &copy; 2025 CivicConnect — Empowering Local Voices
+    </footer>
+  </div>
+
+  <!-- 🌟 Particles.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 70 },
+        "color": { "value": "#ffffff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.2 },
+        "size": { "value": 3 },
+        "line_linked": {
+          "enable": true,
+          "opacity": 0.05
+        },
+        "move": { "enable": true, "speed": 1 }
+      },
+      "interactivity": {
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+</html>

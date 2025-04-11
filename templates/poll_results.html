@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Poll Results - CivicConnect{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto text-center">
+  <h2 class="text-3xl font-bold mb-6 text-white">📈 Results for: {{ poll[1] }}</h2>
+
+  <!-- Bar Display -->
+  <div class="space-y-6 bg-white/10 backdrop-blur p-6 rounded-xl shadow-md text-left">
+    {% for option, count in vote_counts %}
+      <div>
+        <p class="font-semibold text-white">{{ option }}</p>
+        <div class="w-full bg-white/20 h-4 rounded">
+          <div class="bg-blue-500 h-4 rounded"
+               style="width: {{ (count / total_votes * 100) | round(0, 'floor') }}%"></div>
+        </div>
+        <p class="text-sm text-white/70 mt-1">{{ count }} vote(s)</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Chart.js Display -->
+  <div class="mt-10 bg-white/10 backdrop-blur p-6 rounded-xl shadow-md">
+    <h3 class="text-lg font-semibold mb-4 text-white">📊 Vote Distribution Chart</h3>
+    <canvas id="pollChart" height="300"></canvas>
+  </div>
+
+  <p class="mt-6">
+    <a href="/poll" class="text-blue-300 hover:underline">← Back to Poll</a>
+  </p>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('pollChart').getContext('2d');
+  const data = {
+    labels: {{ vote_counts | map(attribute=0) | list | tojson }},
+    datasets: [{
+      data: {{ vote_counts | map(attribute=1) | list | tojson }},
+      backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6']
+    }]
+  };
+  new Chart(ctx, {
+    type: 'pie',
+    data,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.label}: ${ctx.parsed} vote(s)`
+          }
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

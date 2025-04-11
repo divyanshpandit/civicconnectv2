@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Summarize a Bill - CivicConnect{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto text-center">
+  <h2 class="text-3xl font-bold mb-6 text-white">🧠 Bill Summarizer</h2>
+
+  <!-- Form -->
+  <form method="POST" id="summaryForm" class="space-y-4 bg-white/10 backdrop-blur p-6 rounded-xl shadow-md">
+    <textarea name="bill_text" rows="10" placeholder="Paste proposed legislation here..." required
+              class="w-full px-4 py-2 rounded bg-white/20 text-white placeholder-white/70 border border-white/30 focus:ring-2 focus:ring-blue-500"></textarea>
+    <button type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded transition">
+      Summarize
+    </button>
+  </form>
+
+  <!-- Processing message -->
+  <div id="processing" class="mt-8 hidden text-white text-lg font-semibold animate-pulse">
+    ⏳ Processing summary, please wait...
+  </div>
+
+  <!-- Summary result -->
+  {% if summary %}
+  <div id="result" class="mt-10 bg-green-500/20 backdrop-blur p-6 rounded-xl shadow-md text-left">
+    <h3 class="text-xl font-semibold text-white mb-2">📝 Plain Language Summary:</h3>
+    <p class="text-white/90 whitespace-pre-line">{{ summary }}</p>
+  </div>
+  {% endif %}
+</div>
+
+<!-- JS for interactivity -->
+<script>
+  // Show processing when form is submitted
+  document.getElementById("summaryForm").addEventListener("submit", function () {
+    document.getElementById("processing").classList.remove("hidden");
+  });
+
+  // Scroll to result if summary exists
+  window.addEventListener("load", function () {
+    const result = document.getElementById("result");
+    if (result) {
+      result.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+</script>
+{% endblock %}
