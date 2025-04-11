@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+
+# Local database (optional: keep if you want to track it)
+db.sqlite3
+
+# Mac/Linux/Windows system files
+.DS_Store
+Thumbs.db
+
+# VSCode or IDE settings
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Python egg
+*.egg-info/
+
+# Logs
+*.log
+
+# Pytest cache
+.pytest_cache/
+
+# Render build cache (just in case)
+build/
